@@ -1,0 +1,84 @@
+
+body: Column(
+        children: quotes.map((quote) {
+          return Text(quote);
+        }).toList(),
+      ),
+
+body: Column(
+        children: quotes.map((quote) => Text(quote)).toList(),
+      )
+
+ body: Column(
+          children: quotes.map((quote) => Text("${quote.text} - ${quote.author}")).toList(),
+        )
+
+
+        ===========  Pre Stateless Widget  ==========
+
+        import 'package:flutter/material.dart';
+        import 'quotes.dart';
+
+        void main() => runApp(MaterialApp(
+          home: QuoteList(),
+        ));
+
+        class QuoteList extends StatefulWidget {
+          @override
+           _TestState createState() => _TestState();
+        }
+
+         class _TestState extends State<QuoteList> {
+
+          List<Quote> quotes = [
+            Quote(text: "A stitch in time save nine", author: "~Quan G" ) ,
+            Quote(text: "Time is for spending there's only time", author: "~Me"),
+            Quote(text: "When you get to a fork in the road take it", author: "~Me again"),
+            Quote(text: "A stitch in time save nine", author: "~Quan G" ) ,
+
+        ];
+
+          Widget quoteTemplate(quote){
+            return Card(
+              margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
+               child: Padding(
+                 padding: const EdgeInsets.all(12),
+                 child: Column(
+                   crossAxisAlignment: CrossAxisAlignment.stretch,
+                   children: <Widget> [
+                     Text(
+                       quote.text,
+                       style: TextStyle(
+                         fontSize: 18.0,
+                         color: Colors.grey[600],
+                       ),
+                     ),
+                    const SizedBox(height: 4),
+                     Text(
+                       quote.author,
+                       style: TextStyle(
+                         fontSize: 20.0,
+                         color: Colors.grey[800]
+                       ),
+                     ),
+                   ],
+                 ),
+               ),
+            );
+          }
+          @override
+          Widget build(BuildContext context) {
+            return Scaffold(
+              backgroundColor: Colors.grey[200],
+              appBar: AppBar(
+                title: const Text("Quotes"),
+                centerTitle: true,
+              ),
+              body: Column(
+                children: quotes.map((quote) => quoteTemplate(quote)).toList(),
+              )
+            );
+          }
+         }
+
+        ========== after stateless Widget ==========
